@@ -38,7 +38,7 @@
 			
 			paper:FireServer("Paper","Doubloons",0)
 			wait(5)
-      loadstring(game:HttpGet("", true))()
+      loadstring(game:HttpGet("https://raw.githubusercontent.com/TackierHawk/Path2/main/Fen%20Sell%7CBuy", true))()
 			
 			touched = false
 		end
