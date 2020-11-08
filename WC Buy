@@ -1,0 +1,45 @@
+	local PathfindingService = game:GetService("PathfindingService")
+
+	local plr = game.Players.LocalPlayer
+	local char = plr.Character
+	local ai = char:WaitForChild("LocalHumanoid")
+	local hrp = char:WaitForChild("HumanoidRootPart")
+	
+	local p1 = game.Workspace["wcbuywaypoint"]
+	local p3 = game.Workspace["fbuywaypoint"]
+	local p4 = game.Workspace["wcSell"]
+
+	local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
+	local paper = ReplicatedStorage.RemoteFunctionz.Environment:WaitForChild("RequestCargoPurchase")
+	local apples = ReplicatedStorage.RemoteFunctionz.Environment:WaitForChild("RequestCargoPurchase")
+	local drop = ReplicatedStorage.RemoteFunctionz.Gear:WaitForChild("Crate")
+
+	----------------------------------------------------------------------------------
+
+	local path = PathfindingService:CreatePath()
+	path:ComputeAsync(hrp.Position, p1.Position)
+	local waypoints = path:GetWaypoints()
+
+	for i, waypoint in pairs(waypoints) do
+		if waypoint.Action == Enum.PathWaypointAction.Jump then
+			ai:ChangeState(Enum.HumanoidStateType.Jumping)
+		end
+		ai:MoveTo(waypoint.Position)
+		ai.MoveToFinished:Wait(1)
+		print("Finished Buying at Whitecrest")
+	end
+
+	local touched = false
+	p1.Touched:Connect(function(hit)
+		if not touched then
+			
+			touched = true
+			
+			paper:FireServer("Paper","Doubloons",0)
+			wait(5)
+      loadstring(game:HttpGet("", true))()
+			
+			touched = false
+		end
+	end)
