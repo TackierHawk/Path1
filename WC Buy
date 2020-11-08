@@ -22,6 +22,16 @@
 	local waypoints = path:GetWaypoints()
 
 	for i, waypoint in pairs(waypoints) do
+		for _, waypoint in pairs(waypoints) do
+			local part = Instance.new("Part")
+			part.Shape = "Ball"
+			part.Material = "Neon"
+			part.Size = Vector3.new(0.6, 0.6, 0.6)
+			part.Position = waypoint.Position
+				part.Anchored = true
+		part.CanCollide = false
+			part.Parent = game.Workspace
+	end
 		if waypoint.Action == Enum.PathWaypointAction.Jump then
 			ai:ChangeState(Enum.HumanoidStateType.Jumping)
 		end
