@@ -27,7 +27,6 @@
 		end
 		ai:MoveTo(waypoint.Position)
 		ai.MoveToFinished:Wait(1)
-		print("Finished Buying at Whitecrest")
 	end
 
 	local touched = false
